@@ -29,16 +29,13 @@ export const signupUser = async (request, response) => {
 
 export const loginUser = async (request, response) => {
     const user = await User.findOne({ username: request.body.username });
-    // Find user by username
     if (!user) {
         return response.status(400).json({ msg: 'Invalid username or password' });
     }
     
     try {
-        // Verify the password
         const isPasswordMatch = await bcrypt.compare(request.body.password, user.password);
         if (isPasswordMatch) {    
-            // Generate JWT tokens
             const accessToken = jwt.sign(
                 { id: user._id, username: user.username },
                 process.env.ACCESS_SECRET_KEY,
