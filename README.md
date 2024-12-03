@@ -1,2 +1,2 @@
-# Blog-App
-A blog application
+# Blogging-App
+Blogging Application using MERN stack
